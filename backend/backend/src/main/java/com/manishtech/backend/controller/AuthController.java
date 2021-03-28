@@ -8,6 +8,7 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
+import com.manishtech.backend.LoginRequest;
 import com.manishtech.backend.dto.RegisterRequest;
 import com.manishtech.backend.service.AuthService;
 
@@ -23,5 +24,8 @@ public class AuthController {
 		authService.singup(registerRequest);
 		return new ResponseEntity(HttpStatus.OK);
 	}
-
+	@PostMapping("/login")
+	public String login(@RequestBody LoginRequest loginRequest) {
+		return authService.login(loginRequest);
+	}
 }
