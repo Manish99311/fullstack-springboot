@@ -1,5 +1,8 @@
 package com.manishtech.backend.service;
 
+import java.security.Principal;
+import java.util.Optional;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.authentication.AuthenticationManager;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
@@ -44,6 +47,11 @@ public class AuthService {
 		Authentication authenticate = authenticationManager.authenticate(new UsernamePasswordAuthenticationToken(loginRequest.getName(), loginRequest.getPassword()));
 		SecurityContextHolder.getContext().setAuthentication(authenticate);
 		return jwtProvider.generatToken(authenticate);
+	}
+
+	public Optional<org.springframework.security.core.userdetails.User> getCurrentUser() {
+		org.springframework.security.core.userdetails.User Principal=(org.springframework.security.core.userdetails.User)SecurityContextHolder.getContext().getAuthentication().getPrincipal();
+		return Optional.of(Principal);
 	}
 
 }

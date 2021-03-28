@@ -1,19 +1,16 @@
 package com.manishtech.backend.model;
 
-import java.io.Serializable;
 
-import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 
 @Entity
-public class Blog implements Serializable {
+public class Blog {
 	
 	@Id
 	@GeneratedValue(strategy =  GenerationType.IDENTITY)
-	@Column (nullable = false, updatable = false)
 	private Long id;
 	private String name;
 	private String bannerUrl;
