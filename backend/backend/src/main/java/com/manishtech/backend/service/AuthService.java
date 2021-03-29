@@ -14,6 +14,7 @@ import org.springframework.stereotype.Service;
 import com.manishtech.backend.LoginRequest;
 import com.manishtech.backend.Dao.UserRepository;
 import com.manishtech.backend.dto.RegisterRequest;
+import com.manishtech.backend.model.AuthenticationResponse;
 import com.manishtech.backend.model.User;
 
 @Service
@@ -43,10 +44,11 @@ public class AuthService {
 		return passwordEncoder.encode(password); 
 	}
 
-	public String login(LoginRequest loginRequest) {
+	public AuthenticationResponse login(LoginRequest loginRequest) {
 		Authentication authenticate = authenticationManager.authenticate(new UsernamePasswordAuthenticationToken(loginRequest.getName(), loginRequest.getPassword()));
 		SecurityContextHolder.getContext().setAuthentication(authenticate);
-		return jwtProvider.generatToken(authenticate);
+		String authenticationToken = jwtProvider.generatToken(authenticate);
+		return new AuthenticationResponse(authenticationToken,loginRequest.getName());
 	}
 
 	public Optional<org.springframework.security.core.userdetails.User> getCurrentUser() {

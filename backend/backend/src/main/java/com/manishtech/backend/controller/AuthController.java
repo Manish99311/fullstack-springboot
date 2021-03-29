@@ -10,6 +10,7 @@ import org.springframework.web.bind.annotation.RestController;
 
 import com.manishtech.backend.LoginRequest;
 import com.manishtech.backend.dto.RegisterRequest;
+import com.manishtech.backend.model.AuthenticationResponse;
 import com.manishtech.backend.service.AuthService;
 
 @RestController
@@ -25,7 +26,7 @@ public class AuthController {
 		return new ResponseEntity(HttpStatus.OK);
 	}
 	@PostMapping("/login")
-	public String login(@RequestBody LoginRequest loginRequest) {
+	public AuthenticationResponse login(@RequestBody LoginRequest loginRequest) {
 		return authService.login(loginRequest);
 	}
 }
